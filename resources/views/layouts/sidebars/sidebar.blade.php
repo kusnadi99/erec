@@ -1,7 +1,3 @@
-@if(Auth::user()->showMenu()==1)
-{{  }}
-@endif
-
  <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
@@ -13,7 +9,8 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-          <li class="sub-menu">
+                  @if(Auth::user()->showMenu()==1)
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
                           <span>Forms</span>
@@ -23,7 +20,8 @@
                           <li><a class="" href="form_component.html">Form Elements</a></li>                          
                           <li><a class="" href="form_validation.html">Form Validation</a></li>
                       </ul>
-                  </li>       
+                  </li>
+
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>
@@ -42,6 +40,7 @@
                           <span>Widgets</span>
                       </a>
                   </li>
+                  @elseif(Auth::user()->showMenu()==2)
                   <li>                     
                       <a class="" href="chart-chartjs.html">
                           <i class="icon_piechart"></i>
@@ -78,6 +77,7 @@
                   
               </ul>
               <!-- sidebar menu end-->
+              @endif
           </div>
       </aside>
       <!--sidebar end-->
