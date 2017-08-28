@@ -14,11 +14,16 @@
 Route::get('/',['as'=>'/','uses'=>'LoginController@getLogin']);
 Route::post('/login',['as'=>'login','uses'=>'LoginController@postLogin']);
 
-Route::group(['middleware'=>['authentication','roles']], function() {
+Route::get('/noPermission', function() {
+	return view('permission.noPermission');
+});
+
+Route::group(['middleware'=>['authentication']], function() {
 	Route::get('/logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
 	Route::get('/dashboard',['as'=>'dashboard','uses'=>'DashboardController@dashboard']);
 });
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware'=>['authentication','roles'],'roles'=>['Request']], function() {
+	Route::get('/authrequest/home',['as'=>'homePage','uses'=>'RequestHomeController@getHomePage']);
+	Route::get('/authrequest/mpp',['as'=>'mppPage','uses'=>'RequestMppController@getMppPage']);
+});
